@@ -37,7 +37,7 @@ public class UserDao {
 		else 
 			return new User(1, "김연아", 20);
 	}
-	
+	   
 	public User insertUser(User user) {
 		System.out.println("[Dao] insert ok..");
 		return user;
