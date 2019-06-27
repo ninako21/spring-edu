@@ -13,5 +13,24 @@
 		from	user_demo
 		where	userid = #{userid}
 	</select>
+	
+	<select id="selectAllUsers"
+			resultType="com.example.springsi.model.User">
+		select 	*
+		from	user_demo
+	</select>
+	
+	<insert id="insertUser" 
+			parameterType = "com.example.springsi.model.User">
+		insert into user_demo (userid, username, age)
+		values (#{userid}, #{username}, #{age})
+	</insert>
+	
+	<update id="updateUser"
+			parameterType="com.example.springsi.model.User">
+		update user_demo
+		set username = #{username}, age=#{age}
+		where	userid = #{userid}
+	</update>
 
 </mapper>

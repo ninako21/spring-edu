@@ -1,6 +1,9 @@
 package com.example.springsi.controller;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,8 +37,16 @@ public class UserManagementController {
 	 */
 	
 	@GetMapping("/users")
-	public List<User> searchUsers() {
-		return userService.searchAllUsers();		
+	public Map<String,Object> searchUsers() {
+		
+		List<User> listOfUser = userService.searchAllUsers();
+		Map<String,Object> result = new HashMap<>();
+		result.put("status", true);
+		result.put("datetime", new Date() );
+		result.put("data", listOfUser);
+		
+		return result;
+		//return userService.searchAllUsers();	
 	}
 	
 	@GetMapping("/users/{userid}")
@@ -43,7 +54,7 @@ public class UserManagementController {
 		return userService.searchUserByUserID(userid);
 	}
 	
-	@PostMapping("/users")
+	@PostMapping("/users/")
 	public User registUser(@RequestBody User user) {
 		
 		// user 확보 방법 1.html form방식 2.data json
@@ -52,13 +63,13 @@ public class UserManagementController {
 		
 	}
 	
-	@PutMapping("/users/3")
-	public User modifyUser (User user) {
+	@PutMapping("/users/{userid}")
+	public User modifyUser (@RequestBody User user) {
 		return userService.modifyUserInfo(user);
 	}
 	
 	
-	@DeleteMapping("/users/3")
+	@DeleteMapping("/users/{userid}")
 	public User removeUser (Integer userid) {
 		return userService.removeUser(userid);
 	}

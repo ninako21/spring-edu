@@ -39,7 +39,8 @@ public class UserService {
 	
 	// 사용자 정보 수정
 	public User modifyUserInfo(User user) {
-		return user;
+		System.out.println(user);
+		return userDao.updateUser(user);
 		
 	}
 	
