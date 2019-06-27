@@ -3,6 +3,8 @@ package com.example.springsi.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.example.springsi.model.User;
@@ -11,6 +13,9 @@ import com.example.springsi.model.User;
 
 @Repository
 public class UserDao {
+	
+	@Autowired
+	private SqlSession sqlSession;
 
 	public List<User> selectAllUsers() {
 		
@@ -28,14 +33,10 @@ public class UserDao {
 		
 		// DB연동코드 포함 
 		// DB연동은 MyBatis 사용
-		if (userid == 4) {
-			return new User(4, "류현진", 30);
-		}
-		else if (userid == 3) {
-			return new User(3, "강소라", 25);
-		}
-		else 
-			return new User(1, "김연아", 20);
+		// mapper xml에 정의한 query 문 이름으로 sql을 넘겨줘야 함 
+		String statement = "com.example.springsi.dao.UserDao.selectUserByKey"; 
+		return sqlSession.selectOne(statement, userid);
+		
 	}
 	   
 	public User insertUser(User user) {
