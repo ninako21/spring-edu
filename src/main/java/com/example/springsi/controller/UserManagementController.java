@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,6 +23,8 @@ import com.example.springsi.service.UserService;
 @Controller
 @ResponseBody
 public class UserManagementController {
+	
+	private static Logger log = LoggerFactory.getLogger(UserManagementController.class);
 	
 	//controller는 항상 service를 포함하고 있음
 	@Autowired
@@ -51,6 +55,7 @@ public class UserManagementController {
 	
 	@GetMapping("/users/{userid}")
 	public User searchUserByUserid(@PathVariable Integer userid) {
+		log.debug("" + userid);
 		return userService.searchUserByUserID(userid);
 	}
 	
@@ -70,7 +75,8 @@ public class UserManagementController {
 	
 	
 	@DeleteMapping("/users/{userid}")
-	public User removeUser (Integer userid) {
+	public User removeUser (@PathVariable Integer userid) {
+		log.debug("******delete userid : " + userid);
 		return userService.removeUser(userid);
 	}
 	

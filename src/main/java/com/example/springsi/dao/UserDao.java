@@ -58,6 +58,10 @@ public class UserDao {
 	}
 	
 	public User deleteUser(Integer userid) {
+		
+		String statement = NAME_SPACE + "deleteUser";
+		sqlSession.delete(statement, userid);
+		System.out.println("[Dao] delete ok..");
 		return null;
 	}
 }

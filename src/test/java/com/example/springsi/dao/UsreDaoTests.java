@@ -38,6 +38,12 @@ public class UsreDaoTests {
 		// List의 사이즈가 보다 크면성공, null이 아니면 성공
 		Assert.assertNotNull(listOfUser);
 		
-		
+	}
+	
+	@Test
+	public void testUpdateUser() {
+		User user = new User(2,"추신수", 38);
+		User result = userDao.updateUser(user);
+		Assert.assertNotNull(result);
 	}
 }

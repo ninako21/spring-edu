@@ -33,4 +33,10 @@
 		where	userid = #{userid}
 	</update>
 
+	<delete id="deleteUser"
+			parameterType="com.example.springsi.model.User">
+		DELETE FROM user_demo
+		WHERE userid = #{userid}
+	</delete>
+
 </mapper>
